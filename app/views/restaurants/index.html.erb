@@ -1,0 +1,40 @@
+<div class="container">
+  <p id="notice"><%= notice %></p>
+
+  <h1>Restaurants</h1>
+
+  <table>
+    <thead>
+      <tr>
+      <div class="card">
+        <th>Name</th>
+        <th>Address</th>
+        <th>Phone Number</th>
+        <th>Category</th>
+        <th colspan="4"></th>
+      </div>
+      </tr>
+    </thead>
+	  <div class="card">
+    <tbody>
+      <% @restaurants.each do |restaurant| %>
+        <tr>
+          <td><%= restaurant.name %></td>
+          <td><%= restaurant.address %></td>
+          <td><%= restaurant.phone_number %></td>
+          <td><%= restaurant.category %></td>
+          <td><%= link_to 'Show', restaurant, class: "btn btn-primary" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+    </div>
+  </table>
+    
+
+
+  <br>
+
+  <%= link_to 'New Restaurant', new_restaurant_path, class: "btn btn-primary" %>
+</div>
+
+
