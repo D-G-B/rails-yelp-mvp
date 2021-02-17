@@ -21,13 +21,33 @@
 </p>
 
 <h3>Reviews</h3>
-<ul class="list-group">
-  <% @restaurant.reviews.each do |review| %>
-    <li class="list-group-item">
-      <%= review.content %>
+<div class="list-group">
+        <% @restaurant.reviews.each do |review| %>
+          <li class="list-group-item">
+            <small>
+              <% count = 0 %>
+              <% 5.times do %>
+                <% if review.rating > count %>
+                  <i class="fas fa-star"></i>
+                <% else %>
+                  <i class="far fa-star"></i>
+                <% end %>
+                <% count += 1 %>
+              <% end %>
+            </small>
+            <p><%= review.content %></p>
           </li>
-  <% end %>
-</ul>
+        <% end %>
+      </div>
 
-<%= link_to 'Back', restaurants_path, class: "btn btn-primary" %> |
-<%= link_to 'Leave a new review', new_restaurant_review_path(@restaurant), class: "btn btn-primary" %>
+<div class="container">
+  <h1>Leave a new review</h1>
+  <%= simple_form_for [ @restaurant, @review ] do |f| %>
+    <%= f.input :content %>
+    <%= f.input :rating, collection: 0..5 %>
+    <%= f.submit "Leave a review" %>
+  <% end %>
+</div>
+
+
+<%= link_to 'Back', restaurants_path, class: "btn btn-primary" %>
